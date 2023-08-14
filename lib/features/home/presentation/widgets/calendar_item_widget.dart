@@ -1,3 +1,4 @@
+import 'package:calendar_app/constants/app_colors.dart';
 import 'package:calendar_app/core/color_extention.dart';
 import 'package:flutter/material.dart';
 
@@ -9,10 +10,13 @@ class CalendarItemWidget extends StatelessWidget {
     required this.date,
     required this.onTap,
     required this.dateColor,
+    required this.offDays,
   });
+
   final bool isActiveMonth;
   final VoidCallback onTap;
   final bool isSelected;
+  final bool offDays;
   final DateTime date;
   final String dateColor;
 
@@ -26,16 +30,14 @@ class CalendarItemWidget extends StatelessWidget {
           alignment: Alignment.center,
           padding: const EdgeInsets.all(12),
           decoration: isSelected
-              ? const BoxDecoration(color: Colors.lightBlue, shape: BoxShape.circle)
+              ? const BoxDecoration(
+                  color: Colors.lightBlue, shape: BoxShape.circle)
               : BoxDecoration(
-            color: dateColor.toColor(),
-            shape: BoxShape.circle
-          ),
+                  color: dateColor.toColor(), shape: BoxShape.circle),
           child: Text(
             date.day.toString(),
-            style: const TextStyle(
-              fontSize: 14,
-            ),
+            style: TextStyle(
+                fontSize: 14, color: offDays ? AppColors.red : AppColors.black),
           ),
         ),
       ),

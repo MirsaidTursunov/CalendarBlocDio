@@ -82,6 +82,7 @@ class HomePage extends StatelessWidget {
                                     child: CalendarItemWidget(
                                       date: d.date,
                                       isActiveMonth: d.isActiveMonth,
+                                      offDays: d.isOffDay,
                                       dateColor: getColorForDay(),
                                       onTap: () {
                                         context.read<HomeBloc>().add(

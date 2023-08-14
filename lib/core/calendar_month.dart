@@ -5,6 +5,7 @@ class CalendarMonthData {
   final int month;
 
   int get daysInMonth => DateUtils.getDaysInMonth(year, month);
+
   int get firstDayOfWeekIndex => 6;
 
   int get weeksCount => ((daysInMonth + firstDayOffset) / 7).ceil();
@@ -28,14 +29,16 @@ class CalendarMonthData {
     for (var w = 0; w < weeksCount; w++) {
       final week = List<CalendarDayData>.generate(
         7,
-            (index) {
+        (index) {
           final date = firstDayOfWeek.add(Duration(days: index));
 
           final isActiveMonth = date.year == year && date.month == month;
+          final isLastDayOfWeek = index == 6;
 
           return CalendarDayData(
             date: date,
             isActiveMonth: isActiveMonth,
+            isOffDay: isLastDayOfWeek,
           );
         },
       );
@@ -49,9 +52,11 @@ class CalendarMonthData {
 class CalendarDayData {
   final DateTime date;
   final bool isActiveMonth;
+  final bool isOffDay;
 
   const CalendarDayData({
     required this.date,
     required this.isActiveMonth,
+    required this.isOffDay,
   });
 }
